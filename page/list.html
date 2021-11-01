@@ -152,7 +152,7 @@
 			console.log(res)
 			let sum=res.result.reduce((total,item)=>{return total+item.TONGTIEN},0)
 			document.querySelector('.sale-year').innerText=`Doanh Thu Năm ${year}`
-			document.querySelector('.sales-money').innerText=sum
+			document.querySelector('.sales-money').innerText=sum+'$'
 			
 			var arrMonth=[[],[],[],[],[],[],[],[],[],[],[],[]]
 			res.result.map(item=>{
