@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/charts-chartjs.html" />
+
+	<title>Danh Sách Hóa Đơn</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/toast.css">
+</head>
+
+<body>
+	<div class="bg-black-bill ds-none"></div>
+	<div id="toast"></div>
+	<form class="add-bill ds-none" name="form-add">
+		<h3>Thêm hóa đơn mới
+			
+			  <svg  id="btn-close-bill"style="position: absolute; right:10px;top:10px;cursor:pointer; font-size:20px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+				<path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+			  </svg>
+		</h3>
+		<div class="form-group">
+			<label for="mahoadon">Mã hóa đơn (*)  <i style="font-size: 12px;color: #555; text-decoration: none;"> Ví dụ HD_1234567</i></label>
+			<input type="text" name="mahoadon" placeholder="Mã Hóa Đơn.." required="true" pattern="^HD_[0-9]{7}$"  focused="false">
+			<span id="error-message">Mã hóa đơn gồm 10 kí tự, bắt đầu bằng HD__ (ví dụ: HD_1234567)</span>
+		</div>
+		<div class="form-group">
+			<label for="makhachhang">Mã khách hàng (*) <i style="font-size: 12px;color: #555; text-decoration: none;"> Ví dụ KH_1234567</i></label>
+			<input type="text" name="makhachhang" placeholder="Mã Khách Hàng.." required="true" pattern="^KH_[0-9]{7}$"  focused="false">
+			<span id="error-message">Mã khách hàng gồm 10 kí tự, bắt đầu bằng KH__ (ví dụ: KH_1234567)</span>
+		</div>
+		<div class="form-group">
+			<label for="ngaylap">Ngày lập (*)</label>
+			<input type="date" name="ngaylap" placeholder="Ngày Lập.." required="true"  focused="false">
+			<span id="error-message">Trường này là bắt buộc</span>
+		</div>
+		<div class="form-group">
+			<label for="sum">Tổng tiền (*)</label>
+			<input type="text" name="sum" placeholder="Tổng Tiền" required="true" pattern="^[0-9]+(.[0-9]+)*$"   focused="false">
+			<span id="error-message">Trường này là bắt buộc || Giá trị nhập vào phải là số</span>
+		</div>
+		<div class="btn-add-bill">
+			Thêm hóa đơn
+			<div class="spinner-border text-success ds-none" role="status">
+			</div>
+		</div>
+		
+	</form>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="/client/static/add.html">
+					<span class="align-middle">Cơ Sở Dữ Liệu Nâng Cao</span>
+				</a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Hóa Đơn 
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="add.html">
+							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 23 23">
+								<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+							  </svg>
+							<span class="align-middle" style="color: white;  font-weight: bold;">Thêm Hóa Đơn</span>
+            			</a>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="add.html">
+							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 20 20">
+								<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+								<path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+							  </svg>
+							<span class="align-middle" style="color: white;  font-weight: bold;"> Danh Sách Hóa Đơn</span>
+            			</a>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="list.html">
+							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-activity" viewBox="0 0 23 23">
+								<path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+							  </svg>
+							<span class="align-middle" style="color: white;  font-weight: bold;">Thống Kê Doanh Thu</span>
+            			</a>
+					</li>
+					
+					
+
+
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          			<i class="hamburger align-self-center"></i>
+        		</a>
+				
+			<h3 style=" flex:1;text-align: center; font-weight: 600;">Quản Lí Danh Sách Hóa Đơn		</h3>		
+						
+					
+			</nav>
+
+			<main class="content">
+				<div class="control-area" style="margin-bottom: 30px; display: flex;justify-content: space-around;">
+					<button type="button" class="btn btn-outline-primary" style="font-weight: bold;" data-toggle="modal" data-target="#exampleModal">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+						</svg>
+						Thêm Hóa Đơn
+					</button>
+					
+					<a href="/client/static/add.html" class="btn btn-outline-success"style="font-weight: bold;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+							<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+							<path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+						</svg>
+						Xem Danh Sách Hóa Đơn
+					</a>
+					<a href="/client/static/list.html" class="btn btn-outline-danger"style="font-weight: bold;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+						</svg>
+						Thống Kê Doanh Thu
+					</a>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">STT</th>
+							<th scope="col">MÃ HÓA ĐƠN</th>
+							<th scope="col">MÃ KHÁCH HÀNG</th>
+							<th scope="col">NGÀY LẬP</th>
+							<th scope="col">TỔNG TIỀN</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+					
+				</table>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://www.facebook.com/profile.php?id=100009169116108" target="_blank"><strong>DucThang</strong></a> &copy;
+							</p>
+						</div>
+						<div class="col-6 text-end">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://www.facebook.com/profile.php?id=100009169116108" target="_blank">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://www.facebook.com/profile.php?id=100009169116108" target="_blank">Help Center</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://www.facebook.com/profile.php?id=100009169116108" target="_blank">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://www.facebook.com/profile.php?id=100009169116108" target="_blank">Terms</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="js/app.js"></script>
+	<script>
+		function getToast(object){
+        element=document.querySelector("#toast");
+        var html=document.createElement("div");
+        html.classList.add(`toast-${object.type}`,'toast1');
+        htmls=`
+                    <i class="${object.icon} ${object.type}">	</i>
+                    <div class="content" style="padding-right: 15px;">
+                        <h3>${object.header}
+                            <i class="bi bi-x-lg close"></i>
+                        </h3>
+                        <p>${object.message}</p>
+                    </div>
+                    
+                `
+        html.innerHTML=htmls;
+        element.appendChild(html);
+        html.classList.add('FadeInRight');
+        var isClosed=setTimeout(function(){
+            html.classList.add('bienmat');
+            setTimeout(function(){html.remove();},400);
+            
+        },3000);
+        html.onclick=function(e){
+            if(e.target.closest('.close'))
+            {
+                html.classList.add('bienmat');
+                setTimeout(function(){html.remove();},1);
+                clearTimeout(isClosed);
+            }
+        }
+}
+	</script>
+	<script>
+		let list;
+		const bodyEl=document.querySelector('tbody')
+		fetch('http://localhost:3000/api')
+		.then(res=>res.json())
+		.then(res=>{
+			list=res
+			var html=res?.result.map((item,i)=>{return `
+							<tr>
+								<th scope="row">${i}</th>
+								<td>${item.MAHD}</td>
+								<td>${item.MAKH}</td>
+								<td>${moment(item.NGAYLAP).format("LL")}</td>
+								<td>${item.TONGTIEN}</td>
+							</tr>`}).join(' ')
+			bodyEl.innerHTML=html
+			console.log(list)
+		})
+	</script>
+		
+	<script>
+		document.querySelector('.btn-outline-primary').onclick=function(){
+			document.querySelector('.add-bill').classList.toggle('ds-none')
+			document.querySelector('.bg-black-bill').classList.toggle('ds-none')
+			
+		}
+		document.querySelector('#btn-close-bill').onclick=()=>{
+			document.querySelector('.add-bill').classList.toggle('ds-none')
+			document.querySelector('.bg-black-bill').classList.toggle('ds-none')
+
+		}
+		const inputEl=document.querySelectorAll('.form-group input')
+		for(let i=0;i<inputEl.length;i++){
+			inputEl[i].addEventListener('blur',(e)=>{
+				e.target.setAttribute('focused','true')
+			})
+			inputEl[i].addEventListener('input',(e)=>{
+				e.target.setAttribute('focused','false')
+			})
+		}
+		const btnEL=document.querySelector('.btn-add-bill')
+		btnEL.addEventListener('click',(e)=>{
+			e.preventDefault()
+			//console.log(typeof document.querySelector('input[name=makhachhang]').value)
+			let mahoadon=document.querySelector('input[name=mahoadon]').value
+			
+			for(let i=0;i<list.result.length;i++){
+				if(list.result[i].MAHD===mahoadon){
+					getToast({
+					header:"WARNING",
+					type:"warning",
+					icon: "bi bi-shield-fill-exclamation",
+					message: "Mã Hóa đơn đã tồn tại trong danh sách"
+					});
+					return
+				}
+			}
+			if(/HD_[0-9]{7}/.test(document.querySelector('input[name=mahoadon]').value) 
+				&&/KH_[0-9]{7}/.test(document.querySelector('input[name=makhachhang]').value)
+				&&document.querySelector('input[name=ngaylap]').value
+				&&/[0-9]+(.[0-9]+)*/.test(document.querySelector('input[name=sum]').value)
+			){
+				const formEl=document.querySelector('.add-bill')
+				let dataForm =new FormData(formEl)
+				const data=Object.fromEntries(dataForm.entries())
+				document.querySelector('.spinner-border').classList.remove('ds-none')
+				fetch('http://localhost:3000/add',{
+					method: 'POST', // *GET, POST, PUT, DELETE, etc.
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)})
+				.then(res=>res.json())
+				.then(res=>{
+					if(res.success){
+						document.querySelector('input[name=mahoadon]').value=''
+						document.querySelector('input[name=mahoadon]').setAttribute('focused','false')
+						document.querySelector('input[name=makhachhang]').value=''
+						document.querySelector('input[name=makhachhang]').setAttribute('focused','false')
+						document.querySelector('input[name=sum]').value=''
+						document.querySelector('input[name=sum]').setAttribute('focused','false')
+						getToast({
+							header:"SUCCESSFUL",
+							type:"success",
+							icon: "bi bi-shield-fill-exclamation",
+							message: "Congratulation, Thêm hóa đơn thành công "
+						});
+					}else{
+						getToast({
+							header:"ERROR",
+							type:"error",
+							icon: "bi bi-exclamation-triangle-fill",
+							message: "Mã số khách hàng không tồn tại, mời kiểm tra lại"
+						});
+					}
+					document.querySelector('.spinner-border').classList.add('ds-none')
+				})
+			}
+			else{
+				console.log('thong tin sai')
+			}
+
+
+			
+		})
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+.block{
+    display: block !important;
+}
+body{
+    position: relative;
+}
+.add-bill{
+    position: absolute;
+    width: 600px;
+    z-index: 1000;
+    top: 10%;
+    left: 50%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px  3px rgb(116, 114, 114,0.5);
+    transform: translate(-50%);
+}
+.add-bill h3{
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    background-color: #3498db;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.ds-none{
+    display: none !important;
+}
+@media (max-width:540px){
+    .add-bill{
+        width: 100%;
+    }
+}
+
+
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 10px auto;
+}
+
+.form-group input{
+    padding: 10px 15px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+
+.form-group label{
+    font-size: 18px;
+    color: rgb(51, 50, 50);
+    font-weight: 500;
+}
+
+.form-group span{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+}
+
+.form-group input:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+.form-group input:invalid[focused="true"] ~ span#error-message{
+    display: block;
+}
+.btn-add-bill{
+    margin: 25px auto;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    background: rgb(5,94,232);
+    background: radial-gradient(circle, rgba(5,94,232,1) 62%, rgba(148,200,233,1) 100%);    
+    width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    border: none;
+    position: relative;
+}
+.spinner-border{
+    position: absolute;
+    right: -45px;
+    top: 13px;
+}
+.bg-black-bill{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    height: 5000px;
+    background-color: rgba(158, 157, 157, 0.8);
+}
+.sales{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.sales-money{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    font-weight: 550;
+}
+.sales-money span{
+    color: #666;
+    font-size: 1rem;
+}
+#dollars{
+    font-size: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: rgb(88, 88, 240);
+    border-radius: 50%;
+    margin-right: 15px;
+}

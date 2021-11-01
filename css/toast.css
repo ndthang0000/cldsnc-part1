@@ -1,0 +1,113 @@
+
+#toast{
+    position: fixed;
+    top: 100px;
+    right: 32px;
+    z-index: 100000;
+}
+button:hover{
+    opacity: 0.8;
+}
+button{
+    margin-right: 15px;
+    transition: 0.3s;
+}
+button:last-child{
+    margin-right: 0px;
+}
+#btn-success{
+    background-color:#00a8ff;
+}
+#btn-error{
+    background-color: #c23616;
+}
+#btn-warning{
+    background-color: #fbc531;
+}
+.toast-success{
+    border-left: 6px solid #00a8ff;
+}
+.toast-error{
+    border-left: 6px solid #c23616;
+}
+.toast-warning{
+    border-left: 6px solid #fbc531;
+}
+.toast1{
+    position: relative;
+    margin-top: 30px;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #f5f6fa;
+    box-shadow: 1px 2px 10px rgb(133, 131, 131);
+    transition: 0.5s all ease;
+
+}
+.FadeInRight{
+    animation: FadeinRight 0.4s forwards;
+}
+.bienmat{
+    animation: bienmat 0.3s forwards;
+}
+
+@-webkit-keyframes FadeinRight{
+    0% {
+        transform: translateX(600px);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@-webkit-keyframes bienmat{
+    0% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+i.success{
+    font-size: 1.5rem;
+    color: #00a8ff;
+    margin: 1.2rem;
+}
+i.error{
+    font-size: 1.5rem;
+    color: #c23616;
+    margin: 1.2rem;
+}
+i.warning{
+    font-size: 1.5rem;
+    color: #fbc531;
+    margin: 1.2rem;
+}
+.content p{
+    color: #555;
+    font-size: 1rem;
+    position: relative;
+}
+.close{
+    top: 8px;
+    right:8px ;
+    position: absolute;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #888;
+}
+.close:hover{
+    color: #333;
+}
+@media (max-width:740px){
+    html{
+        font-size: 10px;
+    }
+    .toast{
+        width: 100%;
+    }
+}
