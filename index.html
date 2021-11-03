@@ -224,7 +224,7 @@
 	<script>
 		let list;
 		const bodyEl=document.querySelector('tbody')
-		fetch('http://localhost:3000/api/getbill')
+		fetch('https://csdl-part.herokuapp.com/api/getbill')
 		.then(res=>res.json())
 		.then(res=>{
 			list=res
@@ -288,7 +288,7 @@
 				let dataForm =new FormData(formEl)
 				const data=Object.fromEntries(dataForm.entries())
 				document.querySelector('.spinner-border').classList.remove('ds-none')
-				fetch('http://localhost:3000/api/add',{
+				fetch('https://csdl-part.herokuapp.com/api/add',{
 					method: 'POST', // *GET, POST, PUT, DELETE, etc.
 					headers: {
 					'Content-Type': 'application/json'

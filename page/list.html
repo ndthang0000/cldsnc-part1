@@ -145,7 +145,7 @@
 		{
 			year=parseInt(window.location.href.split('?')[1].split('=')[1])
 		}
-		fetch(`http://localhost:3000/api/getbill/${year}`)
+		fetch(`https://csdl-part.herokuapp.com/api/getbill/${year}`)
 		.then(res=>res.json())
 		.then(res=>{
 			console.log(res)
