@@ -224,17 +224,18 @@
 	<script>
 		let list;
 		const bodyEl=document.querySelector('tbody')
-		fetch('http://localhost:3000/api')
+		fetch('http://localhost:3000/api/getbill')
 		.then(res=>res.json())
 		.then(res=>{
 			list=res
+			console.log(res)
 			var html=res?.result.map((item,i)=>{return `
 							<tr>
 								<th scope="row">${i}</th>
-								<td>${item.MAHD}</td>
-								<td>${item.MAKH}</td>
-								<td>${moment(item.NGAYLAP).format("LL")}</td>
-								<td>${item.TONGTIEN}</td>
+								<td>${item.mahd}</td>
+								<td>${item.makh}</td>
+								<td>${moment(item.ngaylap).format("LL")}</td>
+								<td>${item.tongtien}</td>
 							</tr>`}).join(' ')
 			bodyEl.innerHTML=html
 			console.log(list)
@@ -287,7 +288,7 @@
 				let dataForm =new FormData(formEl)
 				const data=Object.fromEntries(dataForm.entries())
 				document.querySelector('.spinner-border').classList.remove('ds-none')
-				fetch('http://localhost:3000/add',{
+				fetch('http://localhost:3000/api/add',{
 					method: 'POST', // *GET, POST, PUT, DELETE, etc.
 					headers: {
 					'Content-Type': 'application/json'
