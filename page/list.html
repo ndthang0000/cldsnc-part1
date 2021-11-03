@@ -149,7 +149,7 @@
 		.then(res=>res.json())
 		.then(res=>{
 			console.log(res)
-			let sum=res.result.reduce((total,item)=>{return total+item.tontien},0)
+			let sum=res.result.reduce((total,item)=>{return total+item.tongtien},0)
 			document.querySelector('.sale-year').innerText=`Doanh Thu Năm ${year}`
 			document.querySelector('.sales-money').innerText=sum+'$'
 			
