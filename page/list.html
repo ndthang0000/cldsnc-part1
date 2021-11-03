@@ -145,18 +145,17 @@
 		{
 			year=parseInt(window.location.href.split('?')[1].split('=')[1])
 		}
-		console.log(year,typeof year)
 		fetch(`http://localhost:3000/api/getbill/${year}`)
 		.then(res=>res.json())
 		.then(res=>{
 			console.log(res)
-			let sum=res.result.reduce((total,item)=>{return total+item.TONGTIEN},0)
+			let sum=res.result.reduce((total,item)=>{return total+item.tontien},0)
 			document.querySelector('.sale-year').innerText=`Doanh Thu Năm ${year}`
 			document.querySelector('.sales-money').innerText=sum+'$'
 			
 			var arrMonth=[[],[],[],[],[],[],[],[],[],[],[],[]]
 			res.result.map(item=>{
-				arrMonth[moment(item.NGAYLAP).month()].push(item.TONGTIEN)
+				arrMonth[moment(item.ngaylap).month()].push(item.tongtien)
 			})
 			console.log(arrMonth)
 			var theLastMonth=arrMonth.map(item=>{
