@@ -77,7 +77,8 @@
 			</nav>
 			<div class="sales">
 				<i class="bi bi-currency-dollar" id="dollars"></i>
-				<div class="sales-money">36
+				<div class="sales-money">
+					<span id="sales-money"></span>
 					<span>Tổng Doanh Thu</span>
 				</div>
 				<div class="btn-group" style="margin-left: 100px;">
@@ -151,7 +152,7 @@
 			console.log(res)
 			let sum=res.result.reduce((total,item)=>{return total+item.tongtien},0)
 			document.querySelector('.sale-year').innerText=`Doanh Thu Năm ${year}`
-			document.querySelector('.sales-money').innerText=sum.toFixed(2)+'$'
+			document.querySelector('#sales-money').innerText=sum.toFixed(2)+'$'
 			
 			var arrMonth=[[],[],[],[],[],[],[],[],[],[],[],[]]
 			res.result.map(item=>{
