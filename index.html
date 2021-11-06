@@ -234,13 +234,9 @@
 	<script>
 		let list;
 		const bodyEl=document.querySelector('tbody')
-		fetch('https://csdl-part.herokuapp.com/api/getbill')
-		.then(res=>res.json())
-		.then(res=>{
-			list=res
-			document.querySelector('.remove').remove()
-			var html=res?.result.map((item,i)=>{return `
-							<tr>
+		const render=()=>{
+			var html=list?.result.map((item,i)=>{return `
+							<tr id="${item?.new}">
 								<th scope="row">${i}</th>
 								<td>${item.mahd}</td>
 								<td>${item.makh}</td>
@@ -248,6 +244,14 @@
 								<td>${item.tongtien}</td>
 							</tr>`}).join(' ')
 			bodyEl.innerHTML=html
+		}
+		fetch('https://csdl-part.herokuapp.com/api/getbill')
+		.then(res=>res.json())
+		.then(res=>{
+			list=res
+			list.result=list.result.slice().reverse()
+			document.querySelector('.remove').remove()
+			render()
 		})
 	</script>
 		
@@ -278,7 +282,7 @@
 			let mahoadon=document.querySelector('input[name=mahoadon]').value
 			
 			for(let i=0;i<list.result.length;i++){
-				if(list.result[i].MAHD===mahoadon){
+				if(list.result[i].mahd===mahoadon){
 					getToast({
 					header:"WARNING",
 					type:"warning",
@@ -312,12 +316,21 @@
 						document.querySelector('input[name=makhachhang]').setAttribute('focused','false')
 						document.querySelector('input[name=sum]').value=''
 						document.querySelector('input[name=sum]').setAttribute('focused','false')
+						document.querySelector('.add-bill').classList.toggle('ds-none')
+						document.querySelector('.bg-black-bill').classList.toggle('ds-none')
 						getToast({
 							header:"SUCCESSFUL",
 							type:"success",
 							icon: "bi bi-shield-fill-exclamation",
 							message: "Congratulation, Thêm hóa đơn thành công "
 						});
+						data.new='new'
+						data.mahd=data.mahoadon
+						data.makh=data.makhachhang
+						data.tongtien=data.sum
+						console.log(list)
+						list.result.unshift(data)
+						render()
 					}else{
 						getToast({
 							header:"ERROR",
